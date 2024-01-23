@@ -94,27 +94,14 @@ public class GameOfLife {
 		return newBoard;
 	}
 
-	// Returns the value that cell (i,j) should have in the next generation.
-	// If the cell is alive (equals 1) and has fewer than two live neighbors, it dies (becomes 0).
-	// If the cell is alive and has two or three live neighbors, it remains alive.
-	// If the cell is alive and has more than three live neighbors, it dies.
-	// If the cell is dead and and has three live neighbors, it becomes alive.
-	// Otherwise the cell does not change. 
-	// Assumes that i is at least 1 and at most the number of rows in the board - 1. 
-	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
-	// Uses the count(board,i,j) function to count the number of alive neighbors.
-	public static int cellValue(int[][] board, int i, int j) {
+		public static int cellValue(int[][] board, int i, int j) {
 		int count = count(board, i, j);
 		if ((board[i][j] == 1) && ((count < 2) || (count > 3))){return 0;}
 		if ((board[i][j] == 0) && ((count == 3) || (count == 2))){return 1;}
 		return 0;
 	}
 	
-	// Counts and returns the number of living neighbors of the given cell
-	// (The cell itself is not counted).
-	// Assumes that i is at least 1 and at most the number of rows in the board - 1. 
-	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
-	public static int count(int[][] board, int i, int j) {
+		public static int count(int[][] board, int i, int j) {
 		int counter = 0;
 		if (board[i+1][j] == 1) {counter++;}
 		if (board[i-1][j] == 1) {counter++;}
@@ -127,8 +114,7 @@ public class GameOfLife {
 		return counter;
 	}
 	
-	// Prints the board. Alive and dead cells are printed as 1 and 0, respectively.
-    public static void print(int[][] arr) {
+	public static void print(int[][] arr) {
 		for (int i = 1; i < arr.length - 1; i++)  {
             for (int j = 1; j < arr[0].length - 1; j++) {
                 System.out.printf("%3s", arr[i][j]);
@@ -137,11 +123,6 @@ public class GameOfLife {
         }
 	}
 		
-    // Displays the board. Living and dead cells are represented by black and white squares, respectively.
-    // We use a fixed-size canvas of 900 pixels by 900 pixels for displaying game boards of different sizes.
-    // In order to handle any given board size, we scale the X and Y dimensions according to the board size.
-    // This results in the following visual effect: The smaller the board, the larger the squares
-	// representing cells.
 	public static void show(int[][] board) {
 		StdDraw.setCanvasSize(900, 900);
 		int rows = board.length;
@@ -149,16 +130,9 @@ public class GameOfLife {
 		StdDraw.setXscale(0, cols);
 		StdDraw.setYscale(0, rows);
 
-		// Enables drawing graphics in memory and showing it on the screen only when
-		// the StdDraw.show function is called.
+		
 		StdDraw.enableDoubleBuffering();
 		
-		// For each cell (i,j), draws a filled square of size 1 by 1 (remember that the canvas was 
-		// already scaled to the dimensions rows by cols, which were read from the data file). 
-		// Uses i and j to calculate the (x,y) location of the square's center, i.e. where it
-		// will be drawn in the overall canvas. If the cell contains 1, sets the square's color
-		// to black; otherwise, sets it to white. In the RGB (Red-Green-Blue) color scheme used by
-		// StdDraw, the RGB codes of black and white are, respetively, (0,0,0) and (255,255,255).
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				int color = 255 * (1 - board[i][j]);
@@ -167,6 +141,6 @@ public class GameOfLife {
 			}
 		}
 		StdDraw.show();
-		StdDraw.pause(100); 
+		StdDraw.pause(1000); 
 	}
 }
