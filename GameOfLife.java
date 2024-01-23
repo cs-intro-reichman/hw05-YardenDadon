@@ -95,11 +95,23 @@ public class GameOfLife {
 	}
 
 		public static int cellValue(int[][] board, int i, int j) {
-		int count = count(board, i, j);
-		if ((board[i][j] == 1) && ((count < 2) || (count > 3))){return 0;}
-		if ((board[i][j] == 0) && ((count == 3) || (count == 2))){return 1;}
-		return 0;
-	}
+			int nextVal = 0;
+			int count = count(board, i, j);
+	
+			if ((board[i][j] == 1) && (count < 2)) {
+				nextVal = 0;
+			}
+			if ((board[i][j] == 1) && ((count == 2) || (count == 3))) {
+				nextVal = 1;
+			}
+			if ((board[i][j] == 1) && (count > 3)) {
+				nextVal = 0;
+			}
+			if ((board[i][j] == 0) && (count == 3)) {
+				nextVal = 1;
+			}
+			return nextVal;
+		}
 	
 		public static int count(int[][] board, int i, int j) {
 		int counter = 0;
